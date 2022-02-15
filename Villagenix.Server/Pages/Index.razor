@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Villagenix.Server.Model
 
 @*<h1>Hello, world!</h1>
 
@@ -21,14 +22,27 @@ Price: @Room.Price
 <br/>
 <span>This room is @(Room.IsActive?"Active":"Inactive")</span>
 
-@code{
+<select @bind="SelectedRoomProp">
+    @foreach (var prop in Room.RoomProps)
+    {
+        <option value="@prop.Name">@prop.Name</option>
+    }
+</select>
+<span>The Room prop Selected is: @SelectedRoomProp </span>
 
+@code{
+    string SelectedRoomProp = "";
     Model.BlazorRoom Room = new Model.BlazorRoom()
     {
         Id = 1,
         RoomName = "Villa Suite",
         IsActive = true,
-        Price = 499
+        Price = 499,
+        RoomProps = new List<BlazorRoomProp>()
+        {
+            new Model.BlazorRoomProp(){Id = 1,Name = "Sq Ft",Value = "100"},
+            new Model.BlazorRoomProp(){Id = 2,Name = "Occupancy",Value = "3"}
+        }
     };
 
 }
