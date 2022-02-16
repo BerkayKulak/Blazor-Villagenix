@@ -9,18 +9,18 @@
     <DangerChildContent> Danger From From Content</DangerChildContent>
    
 </ChildComponent>
-<AnotherChildComponent  InputAttributes="InputAttributesFromParent"></AnotherChildComponent>
+<AnotherChildComponent  placeholder="Default"></AnotherChildComponent>
 
 
 <p><b>@messageText</b></p>
 
 @code {
-    public Dictionary<string, object> InputAttributesFromParent { get; set; } = new Dictionary<string, object>()
-    {
-        {"required", "required"},
-        {"placeholder", "Enter the romm name from parent"},
-        {"maxlength", 5}
-    };
+    //public Dictionary<string, object> InputAttributesFromParent { get; set; } = new Dictionary<string, object>()
+    //{
+    //    {"required", "required"},
+    //    {"placeholder", "Enter the romm name from parent"},
+    //    {"maxlength", 5}
+    //};
     private string messageText = "";
 
     private void ShowMessage(MouseEventArgs e)
