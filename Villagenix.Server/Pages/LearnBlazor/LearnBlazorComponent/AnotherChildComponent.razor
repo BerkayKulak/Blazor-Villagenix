@@ -1,0 +1,17 @@
+﻿<div>
+    <h4 class="text text-primary">Another Cilhd</h4>
+    <input id="roomName" placeholder="@Placeholder" required="@Required" maxlength="@MaxLength" class="form-control"/>
+</div>
+
+@code {
+
+    [Parameter]
+    public string Placeholder { get; set; } = "Initial Text";
+
+    [Parameter]
+    public string Required { get; set; } = "Required";
+
+    [Parameter]
+    public string MaxLength { get; set; } = "10";
+
+}
