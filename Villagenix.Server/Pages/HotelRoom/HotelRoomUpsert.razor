@@ -1,6 +1,8 @@
 ﻿@page "/hotel-room/create"
 @page "/hotel-room/edit/{Id:int}"
+@using Villagenix.DataAccess.Migrations
 @inject IHotelRoomRepository HotelRoomRepository;
+@inject IHotelImagesRepository HotelImagesRepository;
 @inject NavigationManager NavigationManager;
 @inject IJSRuntime JsRuntime
 @inject IFileUpload FileUpload
@@ -73,7 +75,7 @@
     public int? Id { get; set; }
     private HotelRoomDto HotelRoomModel { get; set; } = new HotelRoomDto();
     private string Title { get; set; } = "Create";
-
+    private HotelRoomImageDto RoomImage { get; set; } = new HotelRoomImageDto();
     protected override async Task OnInitializedAsync()
     {
         if (Id != null)
@@ -110,6 +112,7 @@
             else
             {
                 var createdResult = await HotelRoomRepository.CreateHotelRoom(HotelRoomModel);
+                await AddHotelRoomImage(createdResult);
                 await JsRuntime.ToastrSuccess("Hotel Room created successfully.");
             }
         }
@@ -171,5 +174,18 @@
             await JsRuntime.ToastrError("Error Occurred");
         }
 
+    }
+
+    private async Task AddHotelRoomImage(HotelRoomDto roomDetails)
+    {
+        foreach (var imageUrl in HotelRoomModel.ImageUrls)
+        {
+            RoomImage = new HotelRoomImageDto()
+            {
+                RoomId = roomDetails.Id,
+                RoomImageUrl = imageUrl
+            };
+            await HotelImagesRepository.CreateHotelRoomImage(RoomImage);
+        }
     }
 }
