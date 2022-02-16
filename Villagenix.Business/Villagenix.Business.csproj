@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\Villagenix.DataAccess.csproj" />
+    <ProjectReference Include="..\Villagenix.DataAccess\Villagenix.DataAccess.csproj" />
     <ProjectReference Include="..\Villagenix.Models\Villagenix.Models.csproj" />
   </ItemGroup>
 

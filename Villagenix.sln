@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Villagenix.Server", "Villagenix.Server\Villagenix.Server.csproj", "{5E9D9D11-7CD4-49A3-B2FC-FA24EB6B310F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Villagenix.DataAccess", "DataAccess\Villagenix.DataAccess.csproj", "{52D844B4-DD07-44C2-82DD-D730F1C59592}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Villagenix.Common", "Common\Villagenix.Common.csproj", "{266DAC10-5372-486B-ADA8-55C106511AE5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Villagenix.Business", "Villagenix.Business\Villagenix.Business.csproj", "{408169A4-82EC-4EA7-AF19-235AF9380DAB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Villagenix.Models", "Villagenix.Models\Villagenix.Models.csproj", "{5F9D5F38-828E-475E-BF5B-1C8A66C94B0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Villagenix.DataAccess", "Villagenix.DataAccess\Villagenix.DataAccess.csproj", "{BE41844A-B62C-467D-94C2-BFDDB9E25219}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,18 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5E9D9D11-7CD4-49A3-B2FC-FA24EB6B310F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E9D9D11-7CD4-49A3-B2FC-FA24EB6B310F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E9D9D11-7CD4-49A3-B2FC-FA24EB6B310F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E9D9D11-7CD4-49A3-B2FC-FA24EB6B310F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{52D844B4-DD07-44C2-82DD-D730F1C59592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52D844B4-DD07-44C2-82DD-D730F1C59592}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52D844B4-DD07-44C2-82DD-D730F1C59592}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52D844B4-DD07-44C2-82DD-D730F1C59592}.Release|Any CPU.Build.0 = Release|Any CPU
-		{266DAC10-5372-486B-ADA8-55C106511AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{266DAC10-5372-486B-ADA8-55C106511AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{266DAC10-5372-486B-ADA8-55C106511AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{266DAC10-5372-486B-ADA8-55C106511AE5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{408169A4-82EC-4EA7-AF19-235AF9380DAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{408169A4-82EC-4EA7-AF19-235AF9380DAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{408169A4-82EC-4EA7-AF19-235AF9380DAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +23,10 @@ Global
 		{5F9D5F38-828E-475E-BF5B-1C8A66C94B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F9D5F38-828E-475E-BF5B-1C8A66C94B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F9D5F38-828E-475E-BF5B-1C8A66C94B0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE41844A-B62C-467D-94C2-BFDDB9E25219}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE41844A-B62C-467D-94C2-BFDDB9E25219}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE41844A-B62C-467D-94C2-BFDDB9E25219}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE41844A-B62C-467D-94C2-BFDDB9E25219}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
