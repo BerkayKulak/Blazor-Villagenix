@@ -1,7 +1,25 @@
 ﻿@page "/hotel-room/create"
+@using Villagenix.Models
+
+<div class="row mt-2 mb-5">
+    <h3 class="card-title text-info mb-3 ml-3">@Title Hotel Room</h3>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <EditForm Model="HotelRoomModel">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <InputText @bind-Value="HotelRoomModel.Name" class="form-control"></InputText>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
 
 <h3>HotelRoomUpsert</h3>
 
 @code {
-
+    private HotelRoomDto HotelRoomModel { get; set; } = new HotelRoomDto();
+    private string Title { get; set; } = "Create";
 }
