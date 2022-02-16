@@ -2,6 +2,7 @@
 @page "/hotel-room/edit/{Id:int}"
 @inject IHotelRoomRepository HotelRoomRepository;
 @inject NavigationManager NavigationManager;
+@inject IJSRuntime JsRuntime
 <div class="row mt-2 mb-5">
     <h3 class="card-title text-info mb-3 ml-3">@Title Hotel Room</h3>
     <div class="col-md-12">
@@ -69,13 +70,35 @@
 
     private async Task HandleHotelRoomUpsert()
     {
-        var roomDetailsByName = await HotelRoomRepository.IsRoomUnique(HotelRoomModel.Name);
-        if (roomDetailsByName != null)
+        try
+        {   var roomDetailsByName = await HotelRoomRepository.IsRoomUnique(HotelRoomModel.Name,HotelRoomModel.Id);
+            if (roomDetailsByName != null)
+            {
+                await JsRuntime.ToastrError("Room name already exists.");
+                return;
+                
+            }
+
+
+            if (HotelRoomModel.Id != 0 && Title == "Update")
+            {
+                var updateRomResult = await HotelRoomRepository.UpdateHotelRoom(HotelRoomModel.Id, HotelRoomModel);
+                await JsRuntime.ToastrSuccess("Hotel Room updated successfully.");
+            }
+            else
+            {
+                var createdResult = await HotelRoomRepository.CreateHotelRoom(HotelRoomModel);
+                await JsRuntime.ToastrSuccess("Hotel Room created successfully.");
+            }
+        }
+        catch (Exception e)
         {
-            return;
+            Console.WriteLine(e);
+            throw;
         }
 
-        var createdResult = await HotelRoomRepository.CreateHotelRoom(HotelRoomModel);
+      
+       
         NavigationManager.NavigateTo("hotel-room");
     }
 }
