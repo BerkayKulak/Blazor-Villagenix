@@ -10,7 +10,7 @@
             <span>@ChildContent</span>
         }
     </div>
-    <span>@ChildContent</span>
+    <button class="btn btn-danger" @onclick="OnClickButtonMethod">Button to be clicked!</button>
 </div>
 
 @code {
@@ -19,4 +19,9 @@
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClickButtonMethod { get; set; }
+
+
 }
