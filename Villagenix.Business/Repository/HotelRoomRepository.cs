@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -86,6 +87,15 @@ namespace Villagenix.Business.Repository
             var roomDetails = await _context.HotelRooms.FindAsync(roomId);
             if (roomDetails != null)
             {
+                var allimages = await _context.HotelRoomImages.Where(x => x.RoomId == roomId).ToListAsync();
+                foreach (var hotelRoomImage in allimages)
+                {
+                    if (File.Exists(hotelRoomImage.RoomImageUrl))
+                    {
+                        File.Delete(hotelRoomImage.RoomImageUrl);
+                    }
+                }
+                _context.HotelRoomImages.RemoveRange(allimages);
                 _context.HotelRooms.Remove(roomDetails);
                 return await _context.SaveChangesAsync();
             }
