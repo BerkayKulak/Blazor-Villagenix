@@ -15,6 +15,9 @@ namespace Villagenix.Business.Mapper
         {
             CreateMap<HotelRoomDto, HotelRoom>();
             CreateMap<HotelRoom, HotelRoomDto>();
+
+            CreateMap<HotelRoomImage, HotelRoomImageDto>().ReverseMap();
+            
         }
     }
 }
