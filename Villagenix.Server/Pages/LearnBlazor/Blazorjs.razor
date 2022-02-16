@@ -4,7 +4,7 @@
 <h3>Blazorjs</h3>
 
 <div class="row">
-    <button class="btn btn-secondary" @onclick="TestConfirmBox"> Text Confirm button</button>
+    <button class="btn btn-secondary" @onclick="(()=>TestConfirmBox(ConfirmMessage))"> Text Confirm button</button>
 </div>
 <div class="row">
     <button class="btn btn-success" @onclick="TestSuccess"> Test Toastr Success</button>
@@ -14,7 +14,7 @@
 <div class="row">
     @if (ConfirmResult)
     {
-        <p>onfirmation Has ben Made</p>
+        <p>Confirmation Has ben Made</p>
     }
     else
     {
@@ -26,19 +26,19 @@
     private string ConfirmMessage { get; set; } = "Are you sure you want to click?";
     private bool ConfirmResult { get; set; }
 
-    private async Task TestConfirmBox()
+    private async Task TestConfirmBox(string message)
     {
-        ConfirmResult =  await jsRuntime.InvokeAsync<bool>("confirm", ConfirmMessage);
+        ConfirmResult =  await jsRuntime.InvokeAsync<bool>("confirm", message);
     }
 
     private async Task TestSuccess()
     {
-        await jsRuntime.InvokeVoidAsync("ShowToastr", "success","Success");
+        await jsRuntime.ToastrSuccess("Success Message");
     }
 
     private async Task TestFailure()
     {
-        await jsRuntime.InvokeVoidAsync("ShowToastr", "error","Error Message");
+        await jsRuntime.ToastrError("Fail Message");
     }
 
 }
