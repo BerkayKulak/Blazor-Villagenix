@@ -14,6 +14,8 @@ using Villagenix.Business.Repository;
 using Villagenix.Business.Repository.IRepository;
 using Villagenix.DataAccess.Data;
 using Villagenix.Server.Data;
+using Villagenix.Server.Service;
+using Villagenix.Server.Service.IService;
 
 namespace Villagenix.Server
 {
@@ -36,6 +38,8 @@ namespace Villagenix.Server
             });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IHotelRoomRepository, HotelRoomRepository>();
+            services.AddScoped<IHotelImagesRepository, HotelImagesRepository>();
+            services.AddScoped<IFileUpload, FileUpload>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
