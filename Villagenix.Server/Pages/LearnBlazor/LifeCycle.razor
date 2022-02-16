@@ -1,4 +1,5 @@
 ﻿@page "/lifecycle"
+@using System.Threading
 
 <h3>LifeCycle</h3>
 
@@ -11,6 +12,8 @@
 <p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button @onclick="StartCountDown">Star Countdown</button>
+<hr/>
 <br/>
 
 @foreach (var item in EventType)
@@ -22,6 +25,7 @@
 @code {
     private int currentCount = 0;
     List<string> EventType = new List<string>();
+    private int Count { get; set; } = 5;
 
     private void IncrementCount()
     {
@@ -68,5 +72,26 @@
         EventType.Add("OnAfterRenderAsync called");
         await Task.Delay(1000);
     }
+
+    protected override bool ShouldRender()
+    {
+        EventType.Add("ShouldRender called");
+        return true;
+    }
+
+    void StartCountDown()
+    {
+        var timer = new Timer(TimeCallBack, null, 1000, 1000);
+    }
+
+    void TimeCallBack(object state)
+    {
+        if (Count > 0)
+        {
+            Count--;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
 
 }
