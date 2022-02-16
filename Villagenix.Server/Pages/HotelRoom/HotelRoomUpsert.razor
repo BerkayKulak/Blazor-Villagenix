@@ -12,7 +12,7 @@
         <div class="card">
             <div class="card-body">
                 <EditForm Model="HotelRoomModel" OnValidSubmit="HandleHotelRoomUpsert">
-                    <DataAnnotationsValidator/>
+                    <DataAnnotationsValidator />
                     @*<ValidationSummary/>*@
                     <div class="form-group">
                         <label>Name</label>
@@ -45,7 +45,7 @@
                                 int serial = 1;
                                 foreach (var roomImage in HotelRoomModel.ImageUrls)
                                 {
-                                    
+
                                     <div class="col-md-2 mt-3">
                                         <div class="room-image" style="background: url('@roomImage') 50% 50%;">
                                             <span class="room-image-title">@serial</span>
@@ -83,7 +83,7 @@
             // updating
             Title = "Update";
             HotelRoomModel = await HotelRoomRepository.GetHotelRoom(Id.Value);
-            if (HotelRoomModel?.HotelRoomImages !=null)
+            if (HotelRoomModel?.HotelRoomImages != null)
             {
                 HotelRoomModel.ImageUrls = HotelRoomModel.HotelRoomImages.Select(u => u.RoomImageUrl).ToList();
             }
@@ -99,18 +99,23 @@
     private async Task HandleHotelRoomUpsert()
     {
         try
-        {   var roomDetailsByName = await HotelRoomRepository.IsRoomUnique(HotelRoomModel.Name,HotelRoomModel.Id);
+        {
+            var roomDetailsByName = await HotelRoomRepository.IsRoomUnique(HotelRoomModel.Name, HotelRoomModel.Id);
             if (roomDetailsByName != null)
             {
                 await JsRuntime.ToastrError("Room name already exists.");
                 return;
-                
+
             }
 
 
             if (HotelRoomModel.Id != 0 && Title == "Update")
             {
                 var updateRomResult = await HotelRoomRepository.UpdateHotelRoom(HotelRoomModel.Id, HotelRoomModel);
+                if (HotelRoomModel.ImageUrls != null && HotelRoomModel.ImageUrls.Any())
+                {
+                    await AddHotelRoomImage(updateRomResult);
+                }
                 await JsRuntime.ToastrSuccess("Hotel Room updated successfully.");
             }
             else
@@ -126,8 +131,8 @@
             throw;
         }
 
-      
-       
+
+
         NavigationManager.NavigateTo("hotel-room");
     }
 
@@ -141,8 +146,8 @@
                 foreach (var file in e.GetMultipleFiles())
                 {
                     System.IO.FileInfo fileInfo = new System.IO.FileInfo(file.Name);
-                    if (fileInfo.Extension.ToLower() == ".jpg" || 
-                        fileInfo.Extension.ToLower() == ".png" || 
+                    if (fileInfo.Extension.ToLower() == ".jpg" ||
+                        fileInfo.Extension.ToLower() == ".png" ||
                         fileInfo.Extension.ToLower() == ".jpeg")
                     {
                         var uploadedImagePath = await FileUpload.UploadFile(file);
@@ -174,7 +179,7 @@
         }
         catch (Exception ex)
         {
-           
+
             await JsRuntime.ToastrError("Error Occurred");
         }
 
@@ -184,12 +189,18 @@
     {
         foreach (var imageUrl in HotelRoomModel.ImageUrls)
         {
-            RoomImage = new HotelRoomImageDto()
+            if (HotelRoomModel.HotelRoomImages == null || HotelRoomModel.HotelRoomImages.Where(x => x.RoomImageUrl == imageUrl).Count() == 0)
             {
-                RoomId = roomDetails.Id,
-                RoomImageUrl = imageUrl
-            };
-            await HotelImagesRepository.CreateHotelRoomImage(RoomImage);
+
+
+                RoomImage = new HotelRoomImageDto()
+                    {
+                        RoomId = roomDetails.Id,
+                        RoomImageUrl = imageUrl
+                    };
+                await HotelImagesRepository.CreateHotelRoomImage(RoomImage);
+            }
+
         }
     }
 }
