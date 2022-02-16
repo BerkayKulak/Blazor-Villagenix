@@ -19,5 +19,6 @@ namespace Villagenix.Models
         public double RegularRate { get; set; }
         public string Details { get; set; }
         public string SqFt { get; set; }
+        public virtual ICollection<HotelRoomImageDto> HotelRoomImages { get; set; }
     }
 }
