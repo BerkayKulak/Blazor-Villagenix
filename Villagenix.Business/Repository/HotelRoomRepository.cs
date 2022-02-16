@@ -103,12 +103,21 @@ namespace Villagenix.Business.Repository
             }
         }
 
-        public async Task<HotelRoomDto> IsRoomUnique(string name)
+        public async Task<HotelRoomDto> IsRoomUnique(string name,int roomId=0)
         {
             try
             {
-                HotelRoomDto hotelRoom = _mapper.Map<HotelRoom, HotelRoomDto>(await _context.HotelRooms.FirstOrDefaultAsync(x => x.Name == name.ToLower()));
-                return hotelRoom;
+                if (roomId == 0)
+                {
+                    HotelRoomDto hotelRoom = _mapper.Map<HotelRoom, HotelRoomDto>(await _context.HotelRooms.FirstOrDefaultAsync(x => x.Name == name.ToLower()));
+                    return hotelRoom;
+                }
+                else
+                {
+                    HotelRoomDto hotelRoom = _mapper.Map<HotelRoom, HotelRoomDto>(await _context.HotelRooms.FirstOrDefaultAsync(x => x.Name == name.ToLower() && x.Id != roomId));
+                    return hotelRoom;
+                }
+              
             }
             catch (Exception e)
             {
