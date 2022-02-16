@@ -1,6 +1,5 @@
 ﻿@page "/hotel-room/create"
-@using Villagenix.Models
-@using Villagenix.Business.Repository.IRepository
+@page "/hotel-room/edit/{Id:int}"
 @inject IHotelRoomRepository HotelRoomRepository;
 @inject NavigationManager NavigationManager;
 <div class="row mt-2 mb-5">
@@ -47,8 +46,26 @@
 <h3>HotelRoomUpsert</h3>
 
 @code {
+    [Parameter]
+    public int? Id { get; set; }
     private HotelRoomDto HotelRoomModel { get; set; } = new HotelRoomDto();
     private string Title { get; set; } = "Create";
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id != null)
+        {
+            // updating
+            Title = "Update";
+            HotelRoomModel = await HotelRoomRepository.GetHotelRoom(Id.Value);
+        }
+        else
+        {
+            // Create
+            HotelRoomModel = new HotelRoomDto();
+
+        }
+    }
 
     private async Task HandleHotelRoomUpsert()
     {
