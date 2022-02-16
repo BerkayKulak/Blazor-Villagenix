@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Villagenix.Server.Service.IService;
 
 namespace Villagenix.Server.Service
@@ -10,10 +11,12 @@ namespace Villagenix.Server.Service
     public class FileUpload:IFileUpload
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public FileUpload(IWebHostEnvironment webHostEnvironment)
+        public FileUpload(IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor)
         {
             _webHostEnvironment = webHostEnvironment;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<string> UploadFile(IBrowserFile file)
@@ -37,7 +40,10 @@ namespace Villagenix.Server.Service
                     memoryStream.WriteTo(fs);
                 }
 
-                var fullPath = $"RoomImages/{fileName}";
+                var url =
+                    $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host.Value}/";
+
+                var fullPath = $"{url}RoomImages/{fileName}";
 
                 return fullPath;
 
