@@ -1,6 +1,7 @@
 ﻿@using Villagenix.Server.Model
 <div class="bg-light border p-2 col-5 offset-1">
     <h4 class="text-secondary">Room - @Room.Id</h4>
+    <input type="checkbox" @onchange="RoomCheckBoxSelectionChanged"/>
     @Room.RoomName
     <br/>
     @Room.Price.ToString("c")
@@ -21,5 +22,13 @@
 {
     [Parameter]
     public BlazorRoom Room { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnRoomCheckBoxSelection { get; set; }
+
+    protected async Task RoomCheckBoxSelectionChanged(ChangeEventArgs e)
+    {
+        await OnRoomCheckBoxSelection.InvokeAsync((bool) e.Value);
+    }
 
 }
