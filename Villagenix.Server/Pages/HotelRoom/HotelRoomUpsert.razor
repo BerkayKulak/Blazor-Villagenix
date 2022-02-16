@@ -40,6 +40,13 @@
                     <div class="form-group">
                         <InputFile OnChange="HandleImageUpload" multiple></InputFile>
                         <div class="row">
+                            @if (IsImageUploadProcessStarted)
+                            {
+                                <div class="col-md-12">
+                                    
+                                    <span><i class="fa fa-spin fa-spinner"></i>Please wait... Images are uploading</span>
+                                </div>
+                            }
                             @if (HotelRoomModel.ImageUrls != null && HotelRoomModel.ImageUrls.Count > 0)
                             {
                                 int serial = 1;
@@ -50,7 +57,7 @@
                                         <div class="room-image" style="background: url('@roomImage') 50% 50%;">
                                             <span class="room-image-title">@serial</span>
                                         </div>
-                                        <button type="button" @onclick="()=>DeletePhoto(roomImage)" class="btn btn-outline-danger btn-btn-block mt-4">Delete</button>
+                                        <button type="button" @onclick="() => DeletePhoto(roomImage)" class="btn btn-outline-danger btn-btn-block mt-4">Delete</button>
                                     </div>
                                     serial++;
                                 }
@@ -77,6 +84,7 @@
     private string Title { get; set; } = "Create";
     private HotelRoomImageDto RoomImage { get; set; } = new HotelRoomImageDto();
     private List<string> DeletedImageNames { get; set; } = new List<string>();
+    private bool IsImageUploadProcessStarted { get; set; } = false;
     protected override async Task OnInitializedAsync()
     {
         if (Id != null)
@@ -153,6 +161,7 @@
 
     private async Task HandleImageUpload(InputFileChangeEventArgs e)
     {
+        IsImageUploadProcessStarted = true;
         try
         {
             var images = new List<string>();
@@ -189,8 +198,10 @@
                 else
                 {
                     await JsRuntime.ToastrError("Image Uploading Failed");
+                    return;
                 }
             }
+            IsImageUploadProcessStarted = false;
         }
         catch (Exception ex)
         {
