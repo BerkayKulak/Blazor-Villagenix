@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Villagenix.Models
 {
-    public class HotelRoomDto
+    public class HotelRoomDTO
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Please enter room name")]
@@ -19,7 +19,7 @@ namespace Villagenix.Models
         public double RegularRate { get; set; }
         public string Details { get; set; }
         public string SqFt { get; set; }
-        public virtual ICollection<HotelRoomImageDto> HotelRoomImages { get; set; }
+        public virtual ICollection<HotelRoomImageDTO> HotelRoomImages { get; set; }
         public List<string> ImageUrls { get; set; }
     }
 }

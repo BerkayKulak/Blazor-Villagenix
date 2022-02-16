@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Villagenix.Models
 {
-    public class HotelRoomImageDto
+    public class HotelRoomImageDTO
     {
         public int Id { get; set; }
         public int RoomId { get; set; }

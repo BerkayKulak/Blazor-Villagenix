@@ -1,7 +1,9 @@
 ﻿@page "/hotel-room"
-@inject IHotelRoomRepository HotelRoomRepository;
+@using Models
+@using Business.Repository.IRepository
+@inject IHotelRoomRepository HotelRoomRepository
 @inject IJSRuntime JsRuntime
-
+@inject IFileUpload FileUpload
 <div class="row mt-4">
     <div class="col-8">
         <h4 class="card-title text-info">Hotel Room's</h4>
@@ -10,54 +12,56 @@
         <NavLink href="hotel-room/create" class="btn btn-info form-control">Add New Room</NavLink>
     </div>
 </div>
-
 <div class="row mt-4">
     <div class="col-12">
         <table class="table table-bordered table-hover">
             <thead>
-            <tr>
-                <th>Name</th>
-                <th>Occupancy</th>
-                <th>Rate</th>
-                <th>Sqft</th>
-                <th>
+                <tr>
+                    <th>Name</th>
+                    <th>Occupancy</th>
+                    <th>Rate</th>
+                    <th>
+                        Sqft
+                    </th>
+                    <th>
 
-                </th>
-            </tr>
+                    </th>
+                </tr>
             </thead>
             <tbody>
-            @if (HotelRooms.Any())
-            {
-                @foreach (var room in HotelRooms)
+                @if (HotelRooms.Any())
+                {
+                    foreach (var room in HotelRooms)
+                    {
+                        <tr>
+                            <td>@room.Name</td>
+                            <td>@room.Occupancy</td>
+                            <td>@room.RegularRate.ToString("c")</td>
+                            <td>@room.SqFt</td>
+                            <td>
+                                <NavLink href="@($"hotel-room/edit/{room.Id}")" class="btn btn-primary">Edit</NavLink>
+
+                            </td>
+                        </tr>
+                    }
+                }
+                else
                 {
                     <tr>
-                        <td>@room.Name</td>
-                        <td>@room.Occupancy</td>
-                        <td>@room.RegularRate.ToString("c")</td>
-                        <td>@room.SqFt</td>
-                        <td>
-                            <NavLink href="@($"hotel-room/edit/{room.Id}")" class="btn btn-primary">Edit</NavLink>
-                            <button class="btn btn-danger" @onclick="()=>HandleDelete(room.Id)">Delete</button>
-                        </td>
+                        <td colspan="5">No records found</td>
                     </tr>
-
                 }
-            }
-            else
-            {
-                <tr><td colspan="5">No Record's found</td></tr>
-
-            }
             </tbody>
         </table>
     </div>
 </div>
 
-<DeleteConfirmation></DeleteConfirmation>
+
+<DeleteConfirmation ConfirmationChanged="ConfirmDelete_Click"></DeleteConfirmation>
 
 @code {
-    private IEnumerable<HotelRoomDto> HotelRooms { get; set; } = new List<HotelRoomDto>();
-    private int? DeleteRoomID { get; set; } = null;
+    private IEnumerable<HotelRoomDTO> HotelRooms { get; set; } = new List<HotelRoomDTO>();
+    private int? DeleteRoomId { get; set; } = null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -67,22 +71,25 @@
 
     private async Task HandleDelete(int roomId)
     {
-        DeleteRoomID = roomId;
-        await JsRuntime.InvokeVoidAsync("ShowDeleteConfirmationModel");
+        DeleteRoomId = roomId;
+        await JsRuntime.InvokeVoidAsync("ShowDeleteConfirmationModal");
     }
 
     public async Task ConfirmDelete_Click(bool isConfirmed)
     {
-        if (isConfirmed && DeleteRoomID != null)
+        if (isConfirmed && DeleteRoomId != null)
         {
-            await HotelRoomRepository.DeleteHotelRoom(DeleteRoomID.Value);
-            await JsRuntime.ToastrSuccess("Hotel Room Deleted Successfully");
+            HotelRoomDTO hotelRoom = await HotelRoomRepository.GetHotelRoom(DeleteRoomId.Value);
+            foreach (var image in hotelRoom.HotelRoomImages)
+            {
+                var imageName = image.RoomImageUrl.Replace($"RoomImages/", "");
+                FileUpload.DeleteFile(imageName);
+            }
+
+            await HotelRoomRepository.DeleteHotelRoom(DeleteRoomId.Value);
+            await JsRuntime.ToastrSuccess("Hotel Room Deleted successfully");
             HotelRooms = await HotelRoomRepository.GetAllHotelRooms();
-
         }
-        await JsRuntime.InvokeVoidAsync("HideDeleteConfirmationModel");
+        await JsRuntime.InvokeVoidAsync("HideDeleteConfirmationModal");
     }
-
-
-
 }

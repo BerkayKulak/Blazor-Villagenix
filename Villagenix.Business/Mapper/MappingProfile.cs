@@ -13,10 +13,10 @@ namespace Villagenix.Business.Mapper
     {
         public MappingProfile()
         {
-            CreateMap<HotelRoomDto, HotelRoom>();
-            CreateMap<HotelRoom, HotelRoomDto>();
+            CreateMap<HotelRoomDTO, HotelRoom>();
+            CreateMap<HotelRoom, HotelRoomDTO>();
 
-            CreateMap<HotelRoomImage, HotelRoomImageDto>().ReverseMap();
+            CreateMap<HotelRoomImage, HotelRoomImageDTO>().ReverseMap();
             
         }
     }

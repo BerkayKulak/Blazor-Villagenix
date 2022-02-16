@@ -1,13 +1,12 @@
 ﻿window.ShowToastr = (type, message) => {
     if (type === "success") {
-        toastr.success(message, "Operation Successful");
+        toastr.success(message, "Operation Successful", { timeOut: 10000 });
     }
-
     if (type === "error") {
-        toastr.error(message, "Operation Error");
+        toastr.error(message, "Operation Failed", { timeOut: 10000 });
     }
-
 }
+
 
 window.ShowSwal = (type, message) => {
     if (type === "success") {
@@ -15,24 +14,21 @@ window.ShowSwal = (type, message) => {
             'Success Notification',
             message,
             'success'
-        );
+        )
     }
-
     if (type === "error") {
         Swal.fire(
             'Error Notification',
             message,
             'error'
-        );
+        )
     }
-
 }
 
-function ShowDeleteConfirmationModel() {
+function ShowDeleteConfirmationModal() {
     $('#deleteConfirmationModal').modal('show');
 }
 
-
-function HideDeleteConfirmationModel() {
+function HideDeleteConfirmationModal() {
     $('#deleteConfirmationModal').modal('hide');
 }

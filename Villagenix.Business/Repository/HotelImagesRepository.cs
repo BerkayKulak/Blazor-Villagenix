@@ -13,60 +13,48 @@ namespace Villagenix.Business.Repository
 {
     public class HotelImagesRepository : IHotelImagesRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _db;
         private readonly IMapper _mapper;
-
-        public HotelImagesRepository(ApplicationDbContext context, IMapper mapper)
+        public HotelImagesRepository(ApplicationDbContext db, IMapper mapper)
         {
             _mapper = mapper;
-            _context = context;
+            _db = db;
         }
 
-        public async Task<int> CreateHotelRoomImage(HotelRoomImageDto imageDTO)
+        public async Task<int> CreateHotelRoomImage(HotelRoomImageDTO imageDTO)
         {
-            var image = _mapper.Map<HotelRoomImageDto, HotelRoomImage>(imageDTO);
-
-            await _context.HotelRoomImages.AddAsync(image);
-
-            return await _context.SaveChangesAsync();
-        }
-
-        public async Task<int> DeleteHotelRoomImageByImageId(int imageId)
-        {
-            var image = await _context.HotelRoomImages.FindAsync(imageId);
-
-            _context.HotelRoomImages.Remove(image);
-
-            return await _context.SaveChangesAsync();
-
-        }
-
-        public async Task<int> DeleteHotelRoomImageByRoomId(int roomId)
-        {
-            var imageList = await _context.HotelRoomImages.Where(x => x.RoomId == roomId).ToListAsync();
-
-            _context.HotelRoomImages.RemoveRange(imageList);
-
-            return await _context.SaveChangesAsync();
+            var image = _mapper.Map<HotelRoomImageDTO, HotelRoomImage>(imageDTO);
+            await _db.HotelRoomImages.AddAsync(image);
+            return await _db.SaveChangesAsync();
         }
 
         public async Task<int> DeleteHotelImageByImageUrl(string imageUrl)
         {
-            var allImages =
-                await _context.HotelRoomImages.FirstOrDefaultAsync(x => x.RoomImageUrl.ToLower() == imageUrl.ToLower());
-            if (allImages == null)
-            {
-                return 0;
-            }
-            _context.HotelRoomImages.Remove(allImages);
-            return await _context.SaveChangesAsync();
+            var allImages = await _db.HotelRoomImages.FirstOrDefaultAsync
+                (x => x.RoomImageUrl.ToLower() == imageUrl.ToLower());
+            _db.HotelRoomImages.Remove(allImages);
+            return await _db.SaveChangesAsync();
+
         }
 
-        public async Task<IEnumerable<HotelRoomImageDto>> GetHotelRoomImages(int roomId)
+        public async Task<int> DeleteHotelRoomImageByImageId(int imageId)
         {
-            return _mapper.Map<IEnumerable<HotelRoomImage>, IEnumerable<HotelRoomImageDto>>(
-            await _context.HotelRoomImages.Where(x => x.RoomId == roomId).ToListAsync());
+            var image = await _db.HotelRoomImages.FindAsync(imageId);
+            _db.HotelRoomImages.Remove(image);
+            return await _db.SaveChangesAsync();
+        }
 
+        public async Task<int> DeleteHotelRoomImageByRoomId(int roomId)
+        {
+            var imageList = await _db.HotelRoomImages.Where(x => x.RoomId == roomId).ToListAsync();
+            _db.HotelRoomImages.RemoveRange(imageList);
+            return await _db.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<HotelRoomImageDTO>> GetHotelRoomImages(int roomId)
+        {
+            return _mapper.Map<IEnumerable<HotelRoomImage>, IEnumerable<HotelRoomImageDTO>>(
+                await _db.HotelRoomImages.Where(x => x.RoomId == roomId).ToListAsync());
         }
     }
 }
