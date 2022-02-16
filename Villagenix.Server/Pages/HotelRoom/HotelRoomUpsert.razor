@@ -76,6 +76,7 @@
     private HotelRoomDto HotelRoomModel { get; set; } = new HotelRoomDto();
     private string Title { get; set; } = "Create";
     private HotelRoomImageDto RoomImage { get; set; } = new HotelRoomImageDto();
+    private List<string> DeletedImageNames { get; set; } = new List<string>();
     protected override async Task OnInitializedAsync()
     {
         if (Id != null)
@@ -112,8 +113,22 @@
             if (HotelRoomModel.Id != 0 && Title == "Update")
             {
                 var updateRomResult = await HotelRoomRepository.UpdateHotelRoom(HotelRoomModel.Id, HotelRoomModel);
-                if (HotelRoomModel.ImageUrls != null && HotelRoomModel.ImageUrls.Any())
+                if ((HotelRoomModel.ImageUrls != null && HotelRoomModel.ImageUrls.Any())
+                    ||(DeletedImageNames != null &&DeletedImageNames.Any()))
                 {
+                    if (DeletedImageNames != null && DeletedImageNames.Any())
+                    {
+                        foreach (var deletedImageName in DeletedImageNames)
+                        {
+                            var imageName = deletedImageName.Replace($"RoomImages/", "");
+                            
+                            var result = FileUpload.DeleteFile(imageName);
+
+                            await HotelImagesRepository.DeleteHotelImageByImageUrl(deletedImageName);
+
+                        }
+                    }
+
                     await AddHotelRoomImage(updateRomResult);
                 }
                 await JsRuntime.ToastrSuccess("Hotel Room updated successfully.");
@@ -213,6 +228,11 @@
             if (HotelRoomModel.Id == 0 && Title == "Create")
             {
                 var result = FileUpload.DeleteFile(imageName);
+            }
+            else
+            {
+                DeletedImageNames ??= new List<string>();
+                DeletedImageNames.Add(imageUrl);
             }
             HotelRoomModel.ImageUrls.RemoveAt(imageIndex);
         }

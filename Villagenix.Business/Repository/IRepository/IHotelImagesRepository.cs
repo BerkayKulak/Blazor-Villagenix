@@ -12,6 +12,7 @@ namespace Villagenix.Business.Repository.IRepository
         public Task<int> CreateHotelRoomImage(HotelRoomImageDto imageDTO);
         public Task<int> DeleteHotelRoomImageByImageId(int imageId);
         public Task<int> DeleteHotelRoomImageByRoomId(int roomId);
+        public Task<int> DeleteHotelImageByImageUrl(string imageUrl);
         public Task<IEnumerable<HotelRoomImageDto>> GetHotelRoomImages(int roomId);
     }
 }
