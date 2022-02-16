@@ -1,6 +1,6 @@
 ﻿@page "/hotel-room"
 @inject IHotelRoomRepository HotelRoomRepository;
-
+@inject IJSRuntime JsRuntime
 
 <div class="row mt-4">
     <div class="col-8">
@@ -26,37 +26,45 @@
             </tr>
             </thead>
             <tbody>
-                @if (HotelRooms.Any())
+            @if (HotelRooms.Any())
+            {
+                @foreach (var room in HotelRooms)
                 {
-                    @foreach (var room in HotelRooms)
-                    {
-                        <tr>
-                            <td>@room.Name</td>
-                            <td>@room.Occupancy</td>
-                            <td>@room.RegularRate.ToString("c")</td>
-                            <td>@room.SqFt</td>
-                            <td>
-                                <NavLink href="@($"hotel-room/edit/{room.Id}")" class="btn btn-primary">Edit</NavLink>
-                            </td>
-                        </tr>
-
-                    }
-                }
-                else
-                {
-                    <tr><td colspan="5">No Record's found</td></tr>
+                    <tr>
+                        <td>@room.Name</td>
+                        <td>@room.Occupancy</td>
+                        <td>@room.RegularRate.ToString("c")</td>
+                        <td>@room.SqFt</td>
+                        <td>
+                            <NavLink href="@($"hotel-room/edit/{room.Id}")" class="btn btn-primary">Edit</NavLink>
+                        </td>
+                    </tr>
 
                 }
+            }
+            else
+            {
+                <tr><td colspan="5">No Record's found</td></tr>
+
+            }
             </tbody>
         </table>
     </div>
 </div>
 
+<DeleteConfirmation></DeleteConfirmation>
+
 @code {
     private IEnumerable<HotelRoomDto> HotelRooms { get; set; } = new List<HotelRoomDto>();
+
     protected override async Task OnInitializedAsync()
     {
         HotelRooms = await HotelRoomRepository.GetAllHotelRooms();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JsRuntime.InvokeVoidAsync("ShowDeleteConfirmationModel");
     }
 
 }
