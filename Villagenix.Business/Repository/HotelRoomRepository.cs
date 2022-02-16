@@ -68,7 +68,11 @@ namespace Villagenix.Business.Repository
         {
             try
             {
-                HotelRoomDto hotelRoom =_mapper.Map<HotelRoom,HotelRoomDto>( await _context.HotelRooms.FirstOrDefaultAsync(x => x.Id == roomId));
+                HotelRoomDto hotelRoom =_mapper.Map<HotelRoom,HotelRoomDto>
+                    ( await _context.HotelRooms.Include(x=>x.HotelRoomImages).
+                        FirstOrDefaultAsync(x => x.Id == roomId));
+
+
                 return hotelRoom;
             }
             catch (Exception e)
