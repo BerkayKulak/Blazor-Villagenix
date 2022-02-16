@@ -1,5 +1,5 @@
 ﻿@using Villagenix.Server.Model
-<div class="bg-light border p-2 col-5 offset-1">
+<div class="bg-light border p-2 col-5 offset-1" @onclick="(args)=>AmenitySelectionChanged(args,Amenties.Name)">
     <h4 class="text-secondary">Amenities - @Amenties.Id</h4>
     @Amenties.Name<br/>
     @Amenties.Description<br/>
@@ -10,5 +10,14 @@
 {
     [Parameter]
     public BlazorAmenties Amenties { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnAmenitySelection { get; set; }
+
+    protected async Task AmenitySelectionChanged(MouseEventArgs e, string name)
+    {
+        await OnAmenitySelection.InvokeAsync((string)name);
+
+    }
 
 }
