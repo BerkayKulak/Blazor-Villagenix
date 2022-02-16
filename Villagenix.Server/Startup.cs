@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Villagenix.Business.Repository;
+using Villagenix.Business.Repository.IRepository;
 using Villagenix.DataAccess.Data;
 using Villagenix.Server.Data;
 
@@ -33,6 +35,7 @@ namespace Villagenix.Server
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<IHotelRoomRepository, HotelRoomRepository>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
