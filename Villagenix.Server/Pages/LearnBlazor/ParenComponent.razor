@@ -5,7 +5,7 @@
 <h3 class="text-danger">Paren Child Component</h3>
 <CascadingValue Value="@MessageForGrandChild" Name="MessageFromGrandParent">
     <CascadingValue Value="@LuckyNumber" Name="GrandParentsLuckNumber">
-        <ChildComponent OnClickButtonMethod="ShowMessage" Title="this title is passed as paramter from Component">
+        <ChildComponent @ref="childComp" OnClickButtonMethod="ShowMessage" Title="this title is passed as paramter from Component">
             @*<ChildContent> Render Fragment From Parent! WooHOO!</ChildContent>*@
             <DangerChildContent> Danger From From Content</DangerChildContent>
    
@@ -16,8 +16,12 @@
 
 
 <p><b>@messageText</b></p>
-
+<div class="row">
+    <button class="btn btn-success" @onclick="()=>childComp.ShowToastrSuccess()">Show Alert</button>
+</div>
 @code {
+
+    private ChildComponent childComp;
 
     private string MessageForGrandChild = "This is a message from Grand Parent";
 
