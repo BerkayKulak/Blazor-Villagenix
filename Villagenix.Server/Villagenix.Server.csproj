@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Villagenix.Models\Villagenix.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>
