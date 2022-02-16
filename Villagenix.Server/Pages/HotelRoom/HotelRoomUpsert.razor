@@ -1,6 +1,8 @@
 ﻿@page "/hotel-room/create"
 @using Villagenix.Models
-
+@using Villagenix.Business.Repository.IRepository
+@inject IHotelRoomRepository HotelRoomRepository;
+@inject NavigationManager NavigationManager;
 <div class="row mt-2 mb-5">
     <h3 class="card-title text-info mb-3 ml-3">@Title Hotel Room</h3>
     <div class="col-md-12">
@@ -50,6 +52,13 @@
 
     private async Task HandleHotelRoomUpsert()
     {
-        HotelRoomModel.Details = "Button click";
+        var roomDetailsByName = await HotelRoomRepository.IsRoomUnique(HotelRoomModel.Name);
+        if (roomDetailsByName != null)
+        {
+            return;
+        }
+
+        var createdResult = await HotelRoomRepository.CreateHotelRoom(HotelRoomModel);
+        NavigationManager.NavigateTo("hotel-room");
     }
 }
