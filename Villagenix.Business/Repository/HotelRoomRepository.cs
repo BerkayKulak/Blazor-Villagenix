@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Villagenix.Business.Repository.IRepository;
 using Villagenix.DataAccess.Data;
 using Villagenix.Models;
-using Villagenix.DataAccess.Data;
 
 namespace Villagenix.Business.Repository
 {

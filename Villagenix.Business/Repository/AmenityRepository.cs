@@ -9,7 +9,6 @@ using Villagenix.Business.Repository.IRepository;
 using Villagenix.DataAccess.Data;
 using Villagenix.Models;
 
-
 namespace Villagenix.Business.Repository
 {
     public class AmenityRepository : IAmenityRepository
