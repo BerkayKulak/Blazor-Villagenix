@@ -1,4 +1,5 @@
-﻿using Microsoft.JSInterop;
+﻿using System.Threading.Tasks;
+using Microsoft.JSInterop;
 
 namespace Villagenix.Client.Helper
 {
@@ -8,7 +9,6 @@ namespace Villagenix.Client.Helper
         {
             await JSRuntime.InvokeVoidAsync("ShowToastr", "success", message);
         }
-
         public static async ValueTask ToastrError(this IJSRuntime JSRuntime, string message)
         {
             await JSRuntime.InvokeVoidAsync("ShowToastr", "error", message);

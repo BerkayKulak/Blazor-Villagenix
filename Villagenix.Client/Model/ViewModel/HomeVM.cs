@@ -1,4 +1,6 @@
-﻿namespace Villagenix.Client.Model.ViewModel
+﻿using System;
+
+namespace Villagenix.Client.Model.ViewModel
 {
     public class HomeVM
     {
