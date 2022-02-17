@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Villagenix.Models
 {
-    internal class ErrorModel
+    public class ErrorModel
     {
+        public string Title { get; set; }
+        public int StatusCode { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }
