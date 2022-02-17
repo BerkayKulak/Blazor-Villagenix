@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Villagenix.Server", "Villag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Villagenix.API", "Villagenix.API\Villagenix.API.csproj", "{B5FFF771-FD28-47BC-B64A-EB6B61D849F8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Villagenix.Client", "Villagenix.Client\Villagenix.Client.csproj", "{0E480350-1903-43F6-A4D4-3FD476FB9D8D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Villagenix.Client", "Villagenix.Client\Villagenix.Client.csproj", "{4DB7D8A3-B904-40BA-A2A8-CA4323CB157B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{B5FFF771-FD28-47BC-B64A-EB6B61D849F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5FFF771-FD28-47BC-B64A-EB6B61D849F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5FFF771-FD28-47BC-B64A-EB6B61D849F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E480350-1903-43F6-A4D4-3FD476FB9D8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E480350-1903-43F6-A4D4-3FD476FB9D8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E480350-1903-43F6-A4D4-3FD476FB9D8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E480350-1903-43F6-A4D4-3FD476FB9D8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DB7D8A3-B904-40BA-A2A8-CA4323CB157B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DB7D8A3-B904-40BA-A2A8-CA4323CB157B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DB7D8A3-B904-40BA-A2A8-CA4323CB157B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DB7D8A3-B904-40BA-A2A8-CA4323CB157B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
