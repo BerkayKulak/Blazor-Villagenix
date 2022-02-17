@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -87,7 +88,38 @@ namespace Villagenix.API.Controllers
                     });
                 }
 
-                //everything is valid and we need to login the user
+                var signinCredentials = GetSigningCredentials();
+                var claims = await GetClaims(user);
+
+                var tokenOptions = new JwtSecurityToken(
+                    issuer: _aPISettings.ValidIssuer,
+                    audience: _aPISettings.ValidAudience,
+                    claims: claims,
+                    expires: DateTime.Now.AddDays(30),
+                    signingCredentials: signinCredentials);
+
+                var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+
+                return Ok(new AuthenticationResponseDTO
+                {
+                    IsAuthSuccessful = true,
+                    Token = token,
+                    userDTO = new UserDTO
+                    {
+                        Name = user.Name,
+                        Id = user.Id,
+                        Email = user.Email,
+                        PhoneNo = user.PhoneNumber
+                    }
+                });
+            }
+            else
+            {
+                return Unauthorized(new AuthenticationResponseDTO
+                {
+                    IsAuthSuccessful = false,
+                    ErrorMessage = "Invalid Authentication"
+                });
             }
         }
 
