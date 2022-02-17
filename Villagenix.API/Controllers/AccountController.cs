@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Villagenix.API.Helper;
 using Villagenix.Common;
 using Villagenix.DataAccess.Data;
@@ -88,5 +91,31 @@ namespace Villagenix.API.Controllers
             }
         }
 
+        private SigningCredentials GetSigningCredentials()
+        {
+            var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_aPISettings.SecretKey));
+            return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
+        }
+
+        private async Task<List<Claim>> GetClaims(ApplicationUser user)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name,user.Email),
+                new Claim(ClaimTypes.Email,user.Email),
+                new Claim("Id",user.Id),
+
+            };
+            var roles = await _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(user.Email));
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+            return claims;
+        }
+
     }
+
+
 }
