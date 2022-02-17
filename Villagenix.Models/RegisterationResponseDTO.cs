@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Villagenix.Models
 {
-    internal class RegisterationResponseDTO
+    public class RegisterationResponseDTO
     {
+        public bool IsRegisterationSuccessful { get; set; }
+        public IEnumerable<string> Errors { get; set; }
     }
 }
