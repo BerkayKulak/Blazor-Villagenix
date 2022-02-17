@@ -26,6 +26,7 @@ namespace Villagenix.API.Controllers
             _signInManager = signInManager;
         }
 
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> SignUp([FromBody] UserRequestDTO userRequestDTO)
         {
@@ -43,7 +44,7 @@ namespace Villagenix.API.Controllers
                 EmailConfirmed = true
             };
 
-            var result = await _userManager.CreateAsync(user, userRequestDTO.PhoneNo);
+            var result = await _userManager.CreateAsync(user, userRequestDTO.Password);
 
             if (!result.Succeeded)
             {
