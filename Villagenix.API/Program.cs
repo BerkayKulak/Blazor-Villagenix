@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using Villagenix.API.Helper;
 using Villagenix.Business.Repository;
@@ -78,6 +79,31 @@ builder.Services.AddControllers().AddJsonOptions(opt => opt.JsonSerializerOption
         opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
     });
 
+
+builder.Services.AddSwaggerGen(c =>
+{
+c.SwaggerDoc("v1", new OpenApiInfo { Title = "Villagenix", Version = "v1" });
+c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+{
+    In = ParameterLocation.Header,
+    Description = "Please Bearer and then token in the field",
+    Name = "Authorization",
+    Type = SecuritySchemeType.ApiKey
+});
+c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
+});
 
 
 var app = builder.Build();
