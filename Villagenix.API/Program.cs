@@ -2,6 +2,7 @@ using System.Configuration;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Villagenix.API.Helper;
 using Villagenix.Business.Repository;
 using Villagenix.Business.Repository.IRepository;
 using Villagenix.DataAccess.Data;
@@ -30,6 +31,8 @@ builder.Services.AddScoped<IAmenityRepository, AmenityRepository>();
 builder.Services.AddRouting(option => option.LowercaseUrls = true);
 builder.Services.AddControllers();
 
+var appSettingsSection = builder.Configuration.GetSection("APISettings");
+builder.Services.Configure<APISettings>(appSettingsSection);
 
 var app = builder.Build();
 

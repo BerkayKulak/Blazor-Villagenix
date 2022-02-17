@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Villagenix.API.Helper;
 using Villagenix.Common;
 using Villagenix.DataAccess.Data;
 using Villagenix.Models;
@@ -16,14 +18,16 @@ namespace Villagenix.API.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly APISettings _aPISettings;
 
         public AccountController(SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager, IOptions<APISettings> options)
         {
             _roleManager = roleManager;
             _userManager = userManager;
             _signInManager = signInManager;
+            _aPISettings = options.Value;
         }
 
         [HttpPost]
