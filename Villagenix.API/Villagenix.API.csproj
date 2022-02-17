@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Villagenix.Common.csproj" />
     <ProjectReference Include="..\DataAccess\Villagenix.DataAccess.csproj" />
     <ProjectReference Include="..\Villagenix.Business\Villagenix.Business.csproj" />
   </ItemGroup>
