@@ -16,4 +16,8 @@
     <Folder Include="wwwroot\Model\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Villagenix.Common.csproj" />
+  </ItemGroup>
+
 </Project>
