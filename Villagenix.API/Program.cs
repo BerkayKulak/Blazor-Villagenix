@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Serialization;
 using Villagenix.API.Helper;
 using Villagenix.Business.Repository;
 using Villagenix.Business.Repository.IRepository;
@@ -59,8 +60,23 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IHotelRoomRepository, HotelRoomRepository>();
 builder.Services.AddScoped<IHotelImagesRepository, HotelImagesRepository>();
 builder.Services.AddScoped<IAmenityRepository, AmenityRepository>();
+
+builder.Services.AddCors(o => o.AddPolicy("Villagenix", builder =>
+{
+    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+}));
+
+
+
+
 builder.Services.AddRouting(option => option.LowercaseUrls = true);
-builder.Services.AddControllers();
+
+builder.Services.AddControllers().AddJsonOptions(opt => opt.JsonSerializerOptions.PropertyNamingPolicy = null)
+    .AddNewtonsoftJson(opt =>
+    {
+        opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
+        opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    });
 
 
 
@@ -75,6 +91,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("Villagenix");
+
+app.UseRouting();
 
 app.UseAuthorization();
 
