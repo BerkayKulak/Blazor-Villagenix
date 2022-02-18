@@ -22,6 +22,7 @@
     <ProjectReference Include="..\Common\Villagenix.Common.csproj" />
     <ProjectReference Include="..\DataAccess\Villagenix.DataAccess.csproj" />
     <ProjectReference Include="..\Villagenix.Business\Villagenix.Business.csproj" />
+    <ProjectReference Include="..\Villagenix.Models\Villagenix.Models.csproj" />
   </ItemGroup>
 
 </Project>
