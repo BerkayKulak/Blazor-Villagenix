@@ -1,11 +1,13 @@
 ﻿@page "/hotel/rooms"
 @using Blazored.LocalStorage
+@using Villagenix.Client.Service.IService
 @using Villagenix.Client.Model.ViewModel
 @using Villagenix.Models
 @using Villagenix.Common
 @using Villagenix.Client.Helper
-@inject LocalStorageService localStorage
-@inject JSRuntime jsRuntime
+@inject ILocalStorageService localStorage
+@inject IJSRuntime jsRuntime
+@inject IHotelRoomService hotelRoomService
 
 <h3>HotelRooms</h3>
 
@@ -31,5 +33,10 @@
         {
             await jsRuntime.ToastrError(e.Message);
         }
+    }
+
+    private async Task LoadRooms()
+    {
+        Rooms = await hotelRoomService.GetHotelRooms(HomeModel.StartDate.ToString("MM/dd/yyyy"), HomeModel.EndDate.ToString("MM/dd/yyyy"));
     }
 }
