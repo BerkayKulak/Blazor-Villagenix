@@ -6,13 +6,17 @@
 
   <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.13" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.13" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Helper\" />
+		<Folder Include="wwwroot\images\" />
+	</ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
     <ProjectReference Include="..\Common\Villagenix.Common.csproj" />
     <ProjectReference Include="..\Villagenix.Models\Villagenix.Models.csproj" />
   </ItemGroup>
