@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
+using Villagenix.Client.Service;
+using Villagenix.Client.Service.IService;
 
 namespace Villagenix.Client
 {
@@ -18,7 +20,9 @@ namespace Villagenix.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration.GetValue<string>("BaseAPIUrl")) }); builder.Services.AddBlazoredLocalStorage();
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration.GetValue<string>("BaseAPIUrl")) });
+            builder.Services.AddBlazoredLocalStorage();
+            builder.Services.AddScoped<IHotelRoomService, HotelRoomService>();
             await builder.Build().RunAsync();
         }
     }
