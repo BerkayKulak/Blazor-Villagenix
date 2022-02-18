@@ -59,6 +59,7 @@ builder.Services.AddAuthentication(opt =>
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IHotelRoomRepository, HotelRoomRepository>();
+builder.Services.AddScoped<IRoomOrderDetailsRepository, RoomOrderDetailsRepository>();
 builder.Services.AddScoped<IHotelImagesRepository, HotelImagesRepository>();
 builder.Services.AddScoped<IAmenityRepository, AmenityRepository>();
 
