@@ -46,7 +46,7 @@ namespace Villagenix.Business.Repository
             return 0;
         }
 
-        public async Task<IEnumerable<HotelRoomDTO>> GetAllHotelRooms()
+        public async Task<IEnumerable<HotelRoomDTO>> GetAllHotelRooms(string checkInDateStr, string checkOutDatestr)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace Villagenix.Business.Repository
             }
         }
 
-        public async Task<HotelRoomDTO> GetHotelRoom(int roomId)
+        public async Task<HotelRoomDTO> GetHotelRoom(int roomId, string checkInDateStr, string checkOutDatestr)
         {
             try
             {
