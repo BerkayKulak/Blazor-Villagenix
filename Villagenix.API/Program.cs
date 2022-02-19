@@ -3,6 +3,7 @@ using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -63,7 +64,7 @@ builder.Services.AddScoped<IHotelRoomRepository, HotelRoomRepository>();
 builder.Services.AddScoped<IRoomOrderDetailsRepository, RoomOrderDetailsRepository>();
 builder.Services.AddScoped<IHotelImagesRepository, HotelImagesRepository>();
 builder.Services.AddScoped<IAmenityRepository, AmenityRepository>();
-
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddCors(o => o.AddPolicy("Villagenix", builder =>
 {
     builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
