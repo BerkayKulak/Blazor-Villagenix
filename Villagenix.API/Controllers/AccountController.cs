@@ -26,7 +26,8 @@ namespace Villagenix.API.Controllers
 
         public AccountController(SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager, IOptions<APISettings> options)
+            RoleManager<IdentityRole> roleManager,
+            IOptions<APISettings> options)
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -58,17 +59,18 @@ namespace Villagenix.API.Controllers
             {
                 var errors = result.Errors.Select(e => e.Description);
                 return BadRequest(new RegisterationResponseDTO
-                    { Errors = errors, IsRegisterationSuccessful = false });
+                { Errors = errors, IsRegisterationSuccessful = false });
             }
             var roleResult = await _userManager.AddToRoleAsync(user, SD.Role_Customer);
             if (!roleResult.Succeeded)
             {
                 var errors = result.Errors.Select(e => e.Description);
                 return BadRequest(new RegisterationResponseDTO
-                    { Errors = errors, IsRegisterationSuccessful = false });
+                { Errors = errors, IsRegisterationSuccessful = false });
             }
             return StatusCode(201);
         }
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -87,6 +89,8 @@ namespace Villagenix.API.Controllers
                         ErrorMessage = "Invalid Authentication"
                     });
                 }
+
+                //everything is valid and we need to login the user
 
                 var signinCredentials = GetSigningCredentials();
                 var claims = await GetClaims(user);
@@ -123,6 +127,7 @@ namespace Villagenix.API.Controllers
             }
         }
 
+
         private SigningCredentials GetSigningCredentials()
         {
             var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_aPISettings.SecretKey));
@@ -146,7 +151,6 @@ namespace Villagenix.API.Controllers
             }
             return claims;
         }
-
     }
 
 
