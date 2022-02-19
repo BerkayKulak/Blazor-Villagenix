@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Stripe.Checkout;
 using Villagenix.Business.Repository.IRepository;
 using Villagenix.Models;
 
@@ -31,6 +32,34 @@ namespace Villagenix.API.Controllers
                     ErrorMessage = "Error while creating Room Details/ Booking"
                 });
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PaymentSuccessful([FromBody] RoomOrderDetailsDTO details)
+        {
+
+            var service = new SessionService();
+            var sessionDetails = service.Get(details.StripeSessionId);
+            if (sessionDetails.PaymentStatus == "paid")
+            {
+                var result = await _repository.MarkPaymentSuccessful(details.Id);
+                if (result == null)
+                {
+                    return BadRequest(new ErrorModel()
+                    {
+                        ErrorMessage = "Can not mark payment as successful"
+                    });
+                }
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(new ErrorModel()
+                {
+                    ErrorMessage = "Can not mark payment as successful"
+                });
+            }
+
         }
     }
 }
