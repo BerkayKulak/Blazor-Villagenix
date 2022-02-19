@@ -18,11 +18,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -30,10 +25,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
-
 var appSettingsSection = builder.Configuration.GetSection("APISettings");
-builder.Services.Configure<APISettings>(appSettingsSection);
 builder.Services.Configure<MailJetSettings>(builder.Configuration.GetSection("MailJetSettings"));
+
+
+builder.Services.Configure<APISettings>(appSettingsSection);
+
 var apiSettings = appSettingsSection.Get<APISettings>();
 var key = Encoding.ASCII.GetBytes(apiSettings.SecretKey);
 
@@ -65,15 +62,15 @@ builder.Services.AddScoped<IRoomOrderDetailsRepository, RoomOrderDetailsReposito
 builder.Services.AddScoped<IHotelImagesRepository, HotelImagesRepository>();
 builder.Services.AddScoped<IAmenityRepository, AmenityRepository>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
+
 builder.Services.AddCors(o => o.AddPolicy("Villagenix", builder =>
 {
     builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
 }));
 
-
-
-
 builder.Services.AddRouting(option => option.LowercaseUrls = true);
+
+
 
 builder.Services.AddControllers().AddJsonOptions(opt => opt.JsonSerializerOptions.PropertyNamingPolicy = null)
     .AddNewtonsoftJson(opt =>
@@ -83,17 +80,22 @@ builder.Services.AddControllers().AddJsonOptions(opt => opt.JsonSerializerOption
     });
 
 
+
+
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-c.SwaggerDoc("v1", new OpenApiInfo { Title = "Villagenix", Version = "v1" });
-c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-{
-    In = ParameterLocation.Header,
-    Description = "Please Bearer and then token in the field",
-    Name = "Authorization",
-    Type = SecuritySchemeType.ApiKey
-});
-c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "HiddenVilla_Api", Version = "v1" });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please Bearer and then token in the field",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
         {
             new OpenApiSecurityScheme
             {
@@ -109,6 +111,7 @@ c.AddSecurityRequirement(new OpenApiSecurityRequirement {
 });
 
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -117,18 +120,27 @@ StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe")["ApiKey"
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+   
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+
 
 app.UseHttpsRedirection();
 
 app.UseCors("Villagenix");
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+
+
 
 app.Run();
