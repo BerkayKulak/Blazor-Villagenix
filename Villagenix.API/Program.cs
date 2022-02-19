@@ -32,7 +32,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 var appSettingsSection = builder.Configuration.GetSection("APISettings");
 builder.Services.Configure<APISettings>(appSettingsSection);
-
+builder.Services.Configure<MailJetSettings>(builder.Configuration.GetSection("MailJetSettings"));
 var apiSettings = appSettingsSection.Get<APISettings>();
 var key = Encoding.ASCII.GetBytes(apiSettings.SecretKey);
 
