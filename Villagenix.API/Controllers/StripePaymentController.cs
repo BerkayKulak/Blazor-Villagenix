@@ -35,7 +35,7 @@ namespace Villagenix.API.Controllers
                         {
                             PriceData = new SessionLineItemPriceDataOptions
                             {
-                                UnitAmount=payment.Amount*100,//convert to cents
+                                UnitAmount=payment.Amount,//convert to cents
                                 Currency="usd",
                                 ProductData= new SessionLineItemPriceDataProductDataOptions
                                 {
