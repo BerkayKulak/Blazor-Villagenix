@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using Stripe;
 using Villagenix.API.Helper;
 using Villagenix.Business.Repository;
 using Villagenix.Business.Repository.IRepository;
@@ -110,6 +111,8 @@ c.AddSecurityRequirement(new OpenApiSecurityRequirement {
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe")["ApiKey"];
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
