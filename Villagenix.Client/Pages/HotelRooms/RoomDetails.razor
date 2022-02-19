@@ -1,5 +1,6 @@
 ﻿@page "/hotel/room-details/{Id:int}"
 @using Blazored.LocalStorage
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components
 @using Villagenix.Client.Service.IService
 @using Villagenix.Client.Model.ViewModel
@@ -12,6 +13,7 @@
 @inject IStripePaymentService stripePaymentService
 @inject IRoomOrderDetailsService roomOrderDetailsService
 
+@attribute [Authorize(Roles = SD.Role_Customer)]
 @if (HotelBooking?.OrderDetails?.HotelRoomDTO?.HotelRoomImages == null)
 {
     <div class="spinner"></div>
