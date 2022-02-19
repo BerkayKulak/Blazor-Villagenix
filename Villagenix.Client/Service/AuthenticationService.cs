@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components.Authorization;
 using Newtonsoft.Json;
 using Villagenix.Client.Service.IService;
 using Villagenix.Common;
@@ -15,10 +16,13 @@ namespace Villagenix.Client.Service
     {
         private readonly HttpClient _client;
         private readonly ILocalStorageService _localStorage;
+        private readonly AuthenticationStateProvider _authStateProvider;
 
-        public AuthenticationService(HttpClient client, ILocalStorageService localStorage)
+        public AuthenticationService(HttpClient client, ILocalStorageService localStorage, AuthenticationStateProvider authStateProvider)
         {
             _client = client;
+            _authStateProvider = authStateProvider;
+            ((AuthStateProvider)_authStateProvider).NotifyUserLogout();
             _localStorage = localStorage;
         }
 
@@ -34,6 +38,7 @@ namespace Villagenix.Client.Service
             {
                 await _localStorage.SetItemAsync(SD.Local_Token, result.Token);
                 await _localStorage.SetItemAsync(SD.Local_UserDetails, result.userDTO);
+                ((AuthStateProvider)_authStateProvider).NotifyUserLoggedIn(result.Token);
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
                 return new AuthenticationResponseDTO { IsAuthSuccessful = true };
             }
