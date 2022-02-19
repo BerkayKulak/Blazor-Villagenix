@@ -17,8 +17,8 @@ namespace Villagenix.API.Helper
 
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            MailjetClient client = new MailjetClient(Environment.GetEnvironmentVariable(_mailJetSettings.PublicKey),
-                Environment.GetEnvironmentVariable(_mailJetSettings.PrivateKey))
+            MailjetClient client = new MailjetClient(_mailJetSettings.PublicKey,
+                _mailJetSettings.PrivateKey)
             {
                 Version = ApiVersion.V3_1,
             };
@@ -43,6 +43,9 @@ namespace Villagenix.API.Helper
                     }
                 });
             MailjetResponse response = await client.PostAsync(request);
+
         }
+
+
     }
 }
