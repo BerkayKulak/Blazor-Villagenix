@@ -1,18 +1,17 @@
 ﻿@page "/hotel/room-details/{Id:int}"
-@using Blazored.LocalStorage
-@using Microsoft.AspNetCore.Authorization
-@using Microsoft.AspNetCore.Components
-@using Villagenix.Client.Service.IService
-@using Villagenix.Client.Model.ViewModel
-@using Villagenix.Models
-@using Villagenix.Common
-@using Villagenix.Client.Helper
 @inject IJSRuntime jsRuntime
 @inject ILocalStorageService localStorage
 @inject IHotelRoomService hotelRoomService
 @inject IStripePaymentService stripePaymentService
 @inject IRoomOrderDetailsService roomOrderDetailsService
-
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components
+@using Villagenix.Client.Helper
+@using Villagenix.Client.Model.ViewModel
+@using Villagenix.Client.Service.IService
+@using Villagenix.Common
+@using Villagenix.Models
+@using Blazored.LocalStorage
 @attribute [Authorize(Roles = SD.Role_Customer)]
 @if (HotelBooking?.OrderDetails?.HotelRoomDTO?.HotelRoomImages == null)
 {
@@ -175,6 +174,15 @@ else
                     HotelBooking.OrderDetails.HotelRoomDTO.TotalAmount =
                          HotelBooking.OrderDetails.HotelRoomDTO.RegularRate;
                 }
+            }
+
+            if (await localStorage.GetItemAsync<UserDTO>(SD.Local_UserDetails) != null)
+            {
+                var userInfo = await localStorage.GetItemAsync<UserDTO>(SD.Local_UserDetails);
+                HotelBooking.OrderDetails.UserId = userInfo.Id;
+                HotelBooking.OrderDetails.Name = userInfo.Name;
+                HotelBooking.OrderDetails.Email = userInfo.Email;
+                HotelBooking.OrderDetails.Phone = userInfo.PhoneNo;
             }
         }
         catch (Exception e)
