@@ -12,7 +12,7 @@
 @using Villagenix.Common
 @using Villagenix.Models
 @using Blazored.LocalStorage
-@attribute [Authorize(Roles = SD.Role_Customer)]
+@attribute [Authorize(Roles = SD.Role_Admin)]
 @if (HotelBooking?.OrderDetails?.HotelRoomDTO?.HotelRoomImages == null)
 {
     <div class="spinner"></div>
@@ -247,11 +247,11 @@ else
         try
         {
             var paymentDTO = new StripePaymentDTO()
-                {
-                    Amount = Convert.ToInt32(HotelBooking.OrderDetails.HotelRoomDTO.TotalAmount * 100),
-                    ProductName = HotelBooking.OrderDetails.HotelRoomDTO.Name,
-                    ReturnUrl = "/hotel/room-details/" + Id
-                };
+            {
+                Amount = Convert.ToInt32(HotelBooking.OrderDetails.HotelRoomDTO.TotalAmount * 100),
+                ProductName = HotelBooking.OrderDetails.HotelRoomDTO.Name,
+                ReturnUrl = "/hotel/room-details/" + Id
+            };
 
             var result = await stripePaymentService.CheckOut(paymentDTO);
 
@@ -294,4 +294,4 @@ else
         return true;
 
     }
-                    }
+}
