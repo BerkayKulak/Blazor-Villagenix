@@ -6,7 +6,7 @@ using Villagenix.Models;
 
 namespace Villagenix.Client.Pages.Authentication
 {
-    public partial class Register
+    public partial class Register : ComponentBase
     {
         private UserRequestDTO UserForRegisteration = new UserRequestDTO();
         public bool IsProcessing { get; set; } = false;

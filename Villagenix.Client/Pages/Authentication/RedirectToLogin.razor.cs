@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Villagenix.Client.Pages.Authentication
 {
-    public partial class RedirectToLogin
+    public partial class RedirectToLogin : ComponentBase
     {
         [Inject]
         private NavigationManager navigationManager { get; set; }

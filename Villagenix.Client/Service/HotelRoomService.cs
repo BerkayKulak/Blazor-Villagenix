@@ -19,7 +19,9 @@ namespace Villagenix.Client.Service
 
         public async Task<HotelRoomDTO> GetHotelRoomDetails(int roomId, string checkInDate, string checkOutDate)
         {
-            var response = await _client.GetAsync($"api/hotelroom/{roomId}?checkInDate={checkInDate}&checkOutDate={checkOutDate}");
+            var checkInDateFormat = checkInDate.Replace(".", "%2F");
+            var checkOutDateFormat = checkOutDate.Replace(".", "%2F");
+            var response = await _client.GetAsync($"api/hotelroom/{roomId}?checkInDate={checkInDateFormat}&checkOutDate={checkOutDateFormat}");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -37,7 +39,9 @@ namespace Villagenix.Client.Service
 
         public async Task<IEnumerable<HotelRoomDTO>> GetHotelRooms(string checkInDate, string checkOutDate)
         {
-            var response = await _client.GetAsync($"api/hotelroom?checkInDate={checkInDate}&checkOutDate={checkOutDate}");
+            var checkInDateFormat = checkInDate.Replace(".", "%2F");
+            var checkOutDateFormat = checkOutDate.Replace(".", "%2F");
+            var response = await _client.GetAsync($"api/hotelroom?checkInDate={checkInDateFormat}&checkOutDate={checkOutDateFormat}");
             var content = await response.Content.ReadAsStringAsync();
             var rooms = JsonConvert.DeserializeObject<IEnumerable<HotelRoomDTO>>(content);
             return rooms;
