@@ -49,8 +49,6 @@ For years JavaScript frameworks have dominated the front end/client side develop
 - How to correctly process payments?
 - Add changes to reflect the changes made
 - How to efficiently understand Blazor and use it in real world projects?
-- Push to the branch (`git push origin improve-feature`)
-- Create a Pull Request 
 
 help developers transition from building basic sample apps to implementing more real world concepts, design patterns, and features.
 
