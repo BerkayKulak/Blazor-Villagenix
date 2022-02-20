@@ -38,15 +38,21 @@
 
 
 Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
+Blazor is an exciting new part of .NET Core (.NET 5) designed for building rich web user interfaces in C#. This course will help developers transition from building basic sample apps to implementing more real world concepts, design patterns, and features.
+
 * You should implement DRY principles to the rest of your life :smile:
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+For years JavaScript frameworks have dominated the front end/client side development! But things are about to change with Blazor!
 
-Use the `BLANK_README.md` to get started.
+- How do you scale an existing application? 
+- How do you architect a mid-large scale project?
+- How to correctly process payments?
+- Add changes to reflect the changes made
+- How to efficiently understand Blazor and use it in real world projects?
+- Push to the branch (`git push origin improve-feature`)
+- Create a Pull Request 
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+help developers transition from building basic sample apps to implementing more real world concepts, design patterns, and features.
 
 
 
