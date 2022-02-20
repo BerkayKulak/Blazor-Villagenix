@@ -88,7 +88,7 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* dotnet csproj.cs Villagenix.API
+* dotnet Villagenix.API.csproj
   ```sh
   <PackageReference Include="AutoMapper" Version="10.1.1" />
   <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
@@ -99,7 +99,7 @@ This is an example of how to list things you need to use the software and how to
   <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.2">
   ```
   
-* dotnet csproj.cs Villagenix.Client
+* dotnet Villagenix.Client.csproj
   ```sh
   <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
   <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.14" />
@@ -109,7 +109,7 @@ This is an example of how to list things you need to use the software and how to
   <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   ```
   
-* dotnet csproj.cs Villagenix.Server
+* dotnet Villagenix.Server.csproj
   ```sh
    <PackageReference Include="AutoMapper" Version="10.1.1" />
    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
