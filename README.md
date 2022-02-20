@@ -70,7 +70,6 @@ This section should list any major frameworks/libraries used to bootstrap your p
 - Build .NET 5 API from scratch
 - Consume .NET 5 API using Blazor WASM
 - Authentication & Authorization in Blazor Server and WASM
-- Push to the branch (`git push origin improve-feature`)
 - Integrate Stripe Payments in Blazor WASM
 - Repository Pattern and Dependency Injection
 - Deploying .NET API, Blazor WASM & Server to Azure
