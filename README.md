@@ -101,33 +101,33 @@ This is an example of how to list things you need to use the software and how to
   
   * dotnet csproj.cs Villagenix.Client
   ```sh
- 		<PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.14" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+  <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
+  <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.14" />
+  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0" />
+  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0" />
+  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   ```
   
     * dotnet csproj.cs Villagenix.Server
   ```sh
- 		<PackageReference Include="AutoMapper" Version="10.1.1" />
-		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
-		<PackageReference Include="Blazored.TextEditor" Version="1.0.3" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.2" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.2">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
+   <PackageReference Include="AutoMapper" Version="10.1.1" />
+   <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+   <PackageReference Include="Blazored.TextEditor" Version="1.0.3" />
+   <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+   <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.2" />
+   <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.2" />
+   <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
+   <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.2">
+   <PrivateAssets>all</PrivateAssets>
+   <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+   </PackageReference>
+   <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />
+   <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2">
+   <PrivateAssets>all</PrivateAssets>
+   <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+   </PackageReference>
+   <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
   ```
 
 
