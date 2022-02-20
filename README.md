@@ -90,7 +90,13 @@ To get a local copy up and running follow these simple example steps.
 This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
-  npm install npm@latest -g
+  <PackageReference Include="AutoMapper" Version="10.1.1" />
+  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+  <PackageReference Include="Mailjet.Api" Version="1.2.3" />
+  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
+  <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.0" />
+  <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.2" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.2">
   ```
 
 ### Installation
