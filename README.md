@@ -61,16 +61,19 @@ This section should list any major frameworks/libraries used to bootstrap your p
 * [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor)
 * [Asp.Net Core API](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-6.0&tabs=visual-studio)
 * [MSSql](https://www.microsoft.com/en-us/sql-server/sql-server-2019)
+* [MVC](https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-6.0)
 
 ### Technologies and Methods
 
-- Fork the repo
-- Create a new branch (`git checkout -b improve-feature`)
-- Make the appropriate changes in the files
-- Add changes to reflect the changes made
-- Commit your changes (`git commit -am 'Improve feature'`)
+- Real world application using Blazor Web Assembly
+- Manage admin features using Blazor Server
+- Build .NET 5 API from scratch
+- Consume .NET 5 API using Blazor WASM
+- Authentication & Authorization in Blazor Server and WASM
 - Push to the branch (`git push origin improve-feature`)
-- Create a Pull Request 
+- Integrate Stripe Payments in Blazor WASM
+- Repository Pattern and Dependency Injection
+- Deploying .NET API, Blazor WASM & Server to Azure
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
