@@ -163,17 +163,26 @@ _Below is an example of how you can instruct your audience on installing and set
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
 ```bash
-# Clone this repository
-$ git clone https://github.com/amitmerchant1990/electron-markdownify
-
-# Go into the repository
-$ cd electron-markdownify
-
-# Install dependencies
-$ npm install
+# Go into the repository API
+$ cd \Villagenix\Villagenix.API
 
 # Run the app
-$ npm start
+$ dotnet run
+$ dotnet run --project ./projects/proj1/proj1.csproj
+
+# Go into the repository Server
+$ cd \Villagenix\Villagenix.Server
+
+# Run the app
+$ dotnet run
+$ dotnet run --project ./projects/proj1/proj1.csproj
+
+# Go into the repository Client
+$ cd \Villagenix\Villagenix.Client
+
+# Run the app
+$ dotnet run
+$ dotnet run --project ./projects/proj1/proj1.csproj
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
