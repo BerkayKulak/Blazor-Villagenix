@@ -190,17 +190,11 @@ $ dotnet run --project ./projects/proj1/proj1.csproj
 
 
 <!-- ROADMAP -->
-## Roadmap
+## Bug / Feature Request
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
+If you find a bug (the website couldn't handle the query and / or gave undesired results), kindly open an issue [here](https://github.com/BerkayKulak/Blazor-Villagenix/issues/new) by including your search query and the expected result.
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+If you'd like to request a new function, feel free to do so by opening an issue [here](https://github.com/BerkayKulak/Blazor-Villagenix/issues/new). Please include sample queries and their corresponding results.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
