@@ -32,7 +32,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img width="100%" src="https://user-images.githubusercontent.com/61355143/154835511-406aee0a-3e81-46c1-9e62-ac7336e081ae.png">
+<img width="100%" src="https://user-images.githubusercontent.com/61355143/154835967-c598eb19-5189-4a7e-92bd-2052383d9ae9.gif">
 <img width="100%" src="https://user-images.githubusercontent.com/61355143/154835677-d3a1204c-4a72-46f6-b2a2-ef383a9cc7de.gif">
 
 There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
